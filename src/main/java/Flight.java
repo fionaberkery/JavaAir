@@ -41,6 +41,10 @@ public class Flight {
         return this.passengers.size();
     }
 
+    public ArrayList<Passenger> returnPassengersArray(){
+        return this.passengers;
+    }
+
     public int getNumberOfCabinCrewOnFlight() {
         return this.cabinCrewMembers.size();
     }
