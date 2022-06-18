@@ -7,17 +7,23 @@ public class PassengerTest {
     Passenger passenger1;
     Passenger passenger2;
     Passenger passenger3;
+    Flight flight;
+    Pilot pilot;
+    Plane plane;
 
     @Before
     public void before(){
-        passenger1 = new Passenger("Taylor Swift", 3);
-        passenger2 = new Passenger("Ed Sheeran", 2);
-        passenger3 = new Passenger("Harry Styles", 1);
+        pilot = new Pilot("Bowser", Rank.CAPTAIN, "N64-39");
+        plane = new Plane(PlaneType.BOEING777);
+        flight = new Flight(pilot, plane, "JA01", "LAS", "EDI", "0600hrs");
+        passenger1 = new Passenger("Toad", 3);
+        passenger2 = new Passenger("Mario", 2);
+        passenger3 = new Passenger("Yoshi", 1);
     }
 
     @Test
     public void passengerHasAName(){
-        assertEquals("Taylor Swift", passenger1.getName());
+        assertEquals("Toad", passenger1.getName());
     }
 
     @Test

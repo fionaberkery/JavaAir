@@ -15,6 +15,8 @@ public class FlightTest {
     Plane plane2;
     Passenger passenger1;
     Passenger passenger2;
+    Passenger passenger3;
+    Passenger passenger4;
     CabinCrewMember cabinCrewMember1;
     CabinCrewMember cabinCrewMember2;
     CabinCrewMember cabinCrewMember3;
@@ -34,6 +36,8 @@ public class FlightTest {
         flight1.addCabinCrew(cabinCrewMember3);
         passenger1 = new Passenger("Peach", 2);
         passenger2 = new Passenger("Yoshi", 1);
+        passenger3 = new Passenger("Bowser", 1);
+        passenger4 = new Passenger("Wario", 1);
     }
 
 
@@ -108,8 +112,18 @@ public class FlightTest {
     public void seatAllocationIsRandomNumberBetween0And150(){
         flight1.bookPassenger(passenger1, flight1);
         int number = passenger1.getSeatNumber();
-        assert(number >= 0 && number <= 150);
+        assert(number >= 0 && number <= 550);
+    }
 
+
+    @Test
+    public void seatNumberCannotBeDoubleBooked(){
+        passenger3 = new Passenger("Luigi", 1);
+        flight2.bookPassenger(passenger1, flight2);
+        flight2.bookPassenger(passenger2, flight2);
+        flight2.bookPassenger(passenger3, flight2);
+        int number = passenger3.getSeatNumber();
+        assert(number >= 0 && number <=3);
     }
 
     @Test
@@ -119,15 +133,10 @@ public class FlightTest {
 
     @Test
     public void cannotBookPassengerOntoFlightIfNotEnoughSeats(){
-        flight2.bookPassenger(passenger1, flight1);
-        assertEquals("ERROR***FULLY BOOKED", flight2.bookPassenger(passenger2, flight1));
+        flight2.bookPassenger(passenger1, flight2);
+        flight2.bookPassenger(passenger2, flight2);
+        flight2.bookPassenger(passenger3, flight2);
+        assertEquals("ERROR***FULLY BOOKED", flight2.bookPassenger(passenger4, flight2));
 
     }
-
-
-
-
-
-
-
 }

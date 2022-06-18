@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Passenger extends Person {
@@ -9,6 +10,8 @@ public class Passenger extends Person {
     public Passenger(String name, int numberOfBags) {
         super(name);
         this.numberOfBags = numberOfBags;
+        this.seatNumber = seatNumber;
+        this.flight = flight;
     }
 
     public int getNoOfBags() {
@@ -31,9 +34,21 @@ public class Passenger extends Person {
         return this.seatNumber;
     }
 
-    public void setSeatNumber(){
-        Random seat = new Random();
-        int upperbound = 150;
-        this.seatNumber = seat.nextInt(upperbound);
-    }
-}
+    public void setSeatNumber(Flight flight){
+        ArrayList<Integer> bookedSeats = new ArrayList<Integer>();
+        ArrayList<Passenger> bookedPassengers = flight.returnPassengersArray();
+        for(Passenger passenger : bookedPassengers) {
+            bookedSeats.add(this.seatNumber);
+        }
+            int flightSeats = flight.getNumberOfAvailableSeats();
+            Random seat = new Random();
+            int seatNumber = seat.nextInt(flightSeats);
+            for(int bookedSeat : bookedSeats) {
+                if (bookedSeat != seatNumber) {
+                    this.seatNumber = seatNumber;
+                    break;
+                }
+            }
+}}
+
+

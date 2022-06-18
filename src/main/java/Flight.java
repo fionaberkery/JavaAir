@@ -79,7 +79,7 @@ public class Flight {
         if (capacity != bookedPassengers) {
             passengers.add(passenger1);
             passenger1.setFlight(flight1);
-            passenger1.setSeatNumber();
+            passenger1.setSeatNumber(flight1);
             return "You're all booked";
         } else
             return "ERROR***FULLY BOOKED";
