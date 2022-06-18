@@ -32,16 +32,16 @@ public class FlightManagerTest {
 
     @Test
     public void flightManagerCanCalculateHowMuchWeightIsBookedByAllPassengers(){
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger1, flight);
+        flight.bookPassenger(passenger2, flight);
         flightManager.calculateTotalReservedWeightForPassengers(flight);
         assertEquals(60, flightManager.getTotalWeightBookedByPassengers(flight));
     }
 
     @Test
     public void flightManagerCanCalculateWeightRemainingForPassengersForFlight(){
-        flight.bookPassenger(passenger1);
-        flight.bookPassenger(passenger2);
+        flight.bookPassenger(passenger1, flight);
+        flight.bookPassenger(passenger2, flight);
         assertEquals(16440, flightManager.getRemainingWeightForPassengers(flight));
     }
 

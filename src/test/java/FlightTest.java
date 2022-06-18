@@ -1,10 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class FlightTest {
 
@@ -94,19 +94,33 @@ public class FlightTest {
 
     @Test
     public void canBookAPassengerOntoFlight(){
-        flight1.bookPassenger(passenger1);
+        flight1.bookPassenger(passenger1, flight1);
         assertEquals(1, flight1.getNumberOfPassengersOnFlight());
     }
 
     @Test
+    public void canAssignFlightToPassengerOnceFlightBooked(){
+        flight1.bookPassenger(passenger1, flight1);
+        assertEquals(flight1, passenger1.getBookedFlight());
+    }
+
+    @Test
+    public void seatAllocationIsRandomNumberBetween0And150(){
+        flight1.bookPassenger(passenger1, flight1);
+        int number = passenger1.getSeatNumber();
+        assert(number >= 0 && number <= 150);
+
+    }
+
+    @Test
     public void flightWillConfirmAPassengerBooking(){
-        assertEquals("You're all booked", flight1.bookPassenger(passenger1));
+        assertEquals("You're all booked", flight1.bookPassenger(passenger1, flight1));
     }
 
     @Test
     public void cannotBookPassengerOntoFlightIfNotEnoughSeats(){
-        flight2.bookPassenger(passenger1);
-        assertEquals("ERROR***FULLY BOOKED", flight2.bookPassenger(passenger2));
+        flight2.bookPassenger(passenger1, flight1);
+        assertEquals("ERROR***FULLY BOOKED", flight2.bookPassenger(passenger2, flight1));
 
     }
 

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class Flight {
 
@@ -73,11 +73,13 @@ public class Flight {
         return getPlaneType().getCapacity();
     }
 
-    public String bookPassenger(Passenger passenger1) {
+    public String bookPassenger(Passenger passenger1, Flight flight1) {
         int bookedPassengers = this.getNumberOfPassengersOnFlight();
         int capacity = getPlaneType().getCapacity();
         if (capacity != bookedPassengers) {
             passengers.add(passenger1);
+            passenger1.setFlight(flight1);
+            passenger1.setSeatNumber();
             return "You're all booked";
         } else
             return "ERROR***FULLY BOOKED";
